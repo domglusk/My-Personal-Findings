@@ -15,3 +15,5 @@ If your getting fps higher than what your screen should be getting after moving 
 Replace qtile and picom with their -git versions
 
 A really cool thing you can do with pacman is install packages via a a .txt file generated via pacman -Q > installedpackages.txt (which can be used to import your previous installed packages) and can be installed via yay -S - < installedpackages.txt (the name doesn't matter it can be whatever)
+
+Use Xrender NOT OpenGL on picom-conf 
