@@ -8,7 +8,7 @@ Stardew Valley is best played through Proton (any version) and to get it working
 When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
 
 Qtile can easily be installed next to really any desktop environment, and importing the profile from Endeavour OS is really simple
-Make sure to enable vsync on picom via the autolaunch.conf. 
+Make sure to enable vsync on picom via the autostart.conf. 
 
 If your getting fps higher than what your screen should be getting after moving between workspaces in qtile, move the game over to it's own workspace and that should fix it.
 
