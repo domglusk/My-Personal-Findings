@@ -59,3 +59,5 @@ I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the fil
 
 ![image](https://user-images.githubusercontent.com/64805993/180672311-2896ab52-3047-439e-9df7-978b630f23d7.png)
 Proof
+# Inconsistent Cursor Theme
+So there's a ton of solutions, but the one that I've found is editing your ~/.config/gtk-3.0/settings.ini and ~/.config/gtk-4.0/settings.ini and change it to the theme you want. You can find what the names are with (thank you arch wiki) find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors" command. If that doesn't work, then you need to edit your ~/.Xresources file and put the icon theme in there, which I've had to do every single time I install endeavour os plasma 
