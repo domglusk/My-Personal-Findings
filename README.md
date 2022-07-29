@@ -61,3 +61,7 @@ I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the fil
 Proof
 # Inconsistent Cursor Theme
 So there's a ton of solutions, but the one that I've found is editing your ~/.config/gtk-3.0/settings.ini and ~/.config/gtk-4.0/settings.ini and change it to the theme you want. You can find what the names are with (thank you arch wiki) find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors" command. If that doesn't work, then you need to edit your ~/.Xresources file and put the icon theme in there, which I've had to do every single time I install endeavour os plasma 
+
+# Standardization of Keybinds in Endeavour OS WM
+https://forum.endeavouros.com/t/please-can-we-get-some-standardization-for-window-manager-shortcuts/29710
+Read the summary here ^ but I feel that there should be a standard for specifically endeavour os' window manager installs, specifically the qtile setup, since it's (in my opinion) the easiest to learn and best feeling to use. I'll try and edit Awesome but I'm not sure how much I can do
