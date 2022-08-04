@@ -1,10 +1,13 @@
 # Various Fixes and Notes That Are Important
 Don't know how to do this, but I'll put my findings here to share
 
-# Modding 
+# Modding
 When using Vortex through SteamTinkerLaunch, modding is very easy (tested on Fallout 4, Fallout New Vegas, Tale of Two Wastelands, and Skyrim
 
 Stardew Valley is best played through Proton (any version) and to get it working correctly with modding, download SMAPI manually and run the .bat file through wine. Vortex won't detect natvie games so you need a .exe in the game files. Use "Move deployment (Experimental!)" in the "Mods" tab of the settings. Make sure the staging folder is on the same drive
+
+# Various Game Fixes
+Hearts of Iron IV running on an optimus will give a black screen on the launcher, both on native and wine. Native uses OpenGL which seems to run terribly in my case, forcing it to use wine specifically 7.0.3. and using DirectX9 will fix the performance, but 5x speed will still be slow. (I have a potential fix for native opengl, will update soon). 
 
 # Endeavour OS/Arch
 When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
@@ -62,6 +65,5 @@ Proof
 # Inconsistent Cursor Theme
 So there's a ton of solutions, but the one that I've found is editing your ~/.config/gtk-3.0/settings.ini and ~/.config/gtk-4.0/settings.ini and change it to the theme you want. You can find what the names are with (thank you arch wiki) find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors" command. If that doesn't work, then you need to edit your ~/.Xresources file and put the icon theme in there, which I've had to do every single time I install endeavour os plasma 
 
-# Standardization of Keybinds in Endeavour OS WM
-https://forum.endeavouros.com/t/please-can-we-get-some-standardization-for-window-manager-shortcuts/29710
-Read the summary here ^ but I feel that there should be a standard for specifically endeavour os' window manager installs, specifically the qtile setup, since it's (in my opinion) the easiest to learn and best feeling to use. I'll try and edit Awesome but I'm not sure how much I can do
+# Legacy Macbooks running OracleVM
+I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't load, using elementary OS was the solution, specifcally using a Linux Ubuntu 64x settings, and enab,ing efi mode in the vm settings. I'm very new to VM's but I need to put this somewhere so I remember. If anyone has any experience with VM's and/or Elementary OS I'd be happy to hear about it. 
