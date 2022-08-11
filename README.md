@@ -8,7 +8,12 @@ Stardew Valley is best played through Proton (any version) and to get it working
 
 # Various Game Fixes
 Hearts of Iron IV running on an optimus will give a black screen on the launcher, both on native and wine. Native uses OpenGL which seems to run terribly in my case, forcing it to use wine specifically 7.0.3. and using DirectX9 will fix the performance, but 5x speed will still be slow.
-To get HOI4 running on OpenGL well you need to use __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command% as the launch options. Haven't tested native but will soon.
+To get HOI4 running on OpenGL well you need to use "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%" as the launch options. Haven't tested native but will soon.
+
+Alright I figured out how to get HOI4 to run natively. You need to put in the mentioned launch options, there are two things you can do.
+1st Way: Whenever you need to use the launcher (to edit mods playtests and such) remove the first underscore _ from "__NV_PRIME_RENDER_OFFLOAD=1" that way it'll launch without giving a black screen. To launch the game add the underscore _ back and launch skipping the launcher from the preparing to launch.
+2nd way: you need to go to ~/.paradoxlauncher/ and find the Paradox Launcher in both folders, then you need to add "--disable-gpu" to the last line in the executable, so it looks like "${SCRIPTPATH}"/Launcher --no-sandbox -disable-gpu "$@" and now you should be able to launch the game normally. 
+
 
 # Endeavour OS/Arch
 When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
