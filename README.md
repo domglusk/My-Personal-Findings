@@ -75,3 +75,7 @@ So there's a ton of solutions, but the one that I've found is editing your ~/.co
 
 # Legacy Macbooks running OracleVM
 I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't load, using elementary OS was the solution, specifcally using a Linux Ubuntu 64x settings, and enab,ing efi mode in the vm settings. I'm very new to VM's but I need to put this somewhere so I remember. If anyone has any experience with VM's and/or Elementary OS I'd be happy to hear about it. 
+
+# Optimus Manager Can't Switch Modes
+So for whatever reason Optimus Manager will probably stop working for you like it has for me about... 5 times ish. Other than just a reset of config files, one issue I was having was with Endeavour OS's sddm settings (I think), the fix is this https://github.com/Askannz/optimus-manager/issues/356#issuecomment-1100828176
+You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
