@@ -6,6 +6,8 @@ When using Vortex through SteamTinkerLaunch, modding is very easy (tested on Fal
 
 Stardew Valley is best played through Proton (any version) and to get it working correctly with modding, download SMAPI manually and run the .bat file through wine. Vortex won't detect natvie games so you need a .exe in the game files. Use "Move deployment (Experimental!)" in the "Mods" tab of the settings. Make sure the staging folder is on the same drive
 
+Payday 2 modding is easy through proton, just download https://znix.xyz/random/payday-2/SuperBLT/latest-wsock.php (or from here if you want the website https://superblt.znix.xyz/) and extract the dll into the root directory of the game (where the .exe is) and add WINEDLLOVERRIDES="wsock32"=n,b %command% to the launch options on steam.
+
 # Various Game Fixes
 Hearts of Iron IV running on an optimus will give a black screen on the launcher, both on native and wine. Native uses OpenGL which seems to run terribly in my case, forcing it to use wine specifically 7.0.3. and using DirectX9 will fix the performance, but 5x speed will still be slow.
 To get HOI4 running on OpenGL well you need to use "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%" as the launch options. Haven't tested native but will soon.
