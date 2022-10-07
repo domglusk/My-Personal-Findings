@@ -39,7 +39,7 @@ Instead of adding i3 to the autostart, simply add qtile instead with the command
 Add picom as a startup app in XFCE, NOT in ~/.config/qtile/autostart.sh
 
 # How to make GTK and QT Apps Consistent w/ Any Theme
-I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
+<s>I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
 
 Install
 qt5ct-kde
@@ -66,7 +66,13 @@ QT_QPA_PLATFORMTHEME-qt5ct
 Now you should have a consistent dark theme for every app you use, including configuration settings (right click > configure dolphin).
 You can get rid of plasma-desktop, but I keep it around just in case I need to change my color scheme/kvantum theme. 
 I have gotten this to work with both breeze and lightly but I still need to test if it'll work. 
-I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the files. I have no idea if importing will work so please let me know via issues tab, if that can be opened.
+I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the files. I have no idea if importing will work so please let me know via issues tab, if that can be opened.</s>
+
+So the way above does work, but after even more testing here's what I learned. Getting qt apps to work outside of KDE seems only possible on arch due to the godsend that is qt5ct-kde which allows you to use kde color schemes. The easiest way to get this to work is by downloading the package, so for my setup it would be this
+
+yay -S qt5ct-kde qt6ct qogir-gtk-theme-git qogir-kde-theme-git dolphin konsole kate
+
+Then open up (like stated above) qt5ct and qt6ct in both user and sudo and set the application style to breeze, the color scheme to custom and Qogir-Dark (or whichever theme you got), and the most important step <b> set the font theme to Noto Sans 10 and fixed with to Monospace 10</b>. This fixes the kerning of text in every kde app. <b>If your using Plasma, setting QT_QPA_PLATFORMTHEME=qt5ct in /etc/environment will cause insane lag when dragging files<b/>. The only reason to use the platform theme variable is if you still want neofetch to have the correct DE stated, <b>The universal fix is to add XDG_CURRENT_DESKTOP=KDE in /etc/environment</b>. In my testing this will work in Qtile and KDE. Now you can use the best suite of apps linux has to offer in any desktop/window manager you see fit!
 
 ![image](https://user-images.githubusercontent.com/64805993/180672311-2896ab52-3047-439e-9df7-978b630f23d7.png)
 Proof
