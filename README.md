@@ -16,6 +16,7 @@ Alright I figured out how to get HOI4 to run natively. You need to put in the me
 1st Way: Whenever you need to use the launcher (to edit mods playtests and such) remove the first underscore _ from "__NV_PRIME_RENDER_OFFLOAD=1" that way it'll launch without giving a black screen. To launch the game add the underscore _ back and launch skipping the launcher from the preparing to launch.
 2nd way: you need to go to ~/.paradoxlauncher/ and find the Paradox Launcher in both folders, then you need to add "--disable-gpu" to the last line in the executable, so it looks like "${SCRIPTPATH}"/Launcher --no-sandbox -disable-gpu "$@" and now you should be able to launch the game normally. 
 
+If your on an Optimus System, you need to be in nvidia mode to play opengl games, as in my experience they all with forcibly run on the intel card and games like TF2 won't let you play online using the launch options. 
 
 # Endeavour OS/Arch
 When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
