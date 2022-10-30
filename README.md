@@ -8,6 +8,10 @@ Stardew Valley is best played through Proton (any version) and to get it working
 
 Payday 2 modding is easy through proton, just download https://znix.xyz/random/payday-2/SuperBLT/latest-wsock.php (or from here if you want the website https://superblt.znix.xyz/) and extract the dll into the root directory of the game (where the .exe is) and add WINEDLLOVERRIDES="wsock32"=n,b %command% to the launch options on steam.
 
+Red Dead Redemption 2 can be modded with both Scripthook and LML, just install both of them and add WINEDLLOVERRIDES="dinput8,ScriptHookRDR2,lml=n,b" %command% as the steam launch options,this should activaste all the .ini files required for both to work, in my testing I can even just use vortex (from steamtinkerlaunch) to download scripthook mods and then lml mods manually. The two main mods that I can confirm work are Horse Controller Fix https://www.nexusmods.com/reddeadredemption2/mods/1347 and Seasons https://www.nexusmods.com/reddeadredemption2/mods/1557?tab=description 
+(Scripthook) http://www.dev-c.com/rdr2/scripthookrdr2/ 
+(LML) https://www.rdr2mods.com/downloads/rdr2/tools/76-lennys-mod-loader-rdr/ 
+
 # Various Game Fixes
 Hearts of Iron IV running on an optimus will give a black screen on the launcher, both on native and wine. Native uses OpenGL which seems to run terribly in my case, forcing it to use wine specifically 7.0.3. and using DirectX9 will fix the performance, but 5x speed will still be slow.
 To get HOI4 running on OpenGL well you need to use "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%" as the launch options. Haven't tested native but will soon.
@@ -67,6 +71,8 @@ QT_QPA_PLATFORMTHEME-qt5ct
 Now you should have a consistent dark theme for every app you use, including configuration settings (right click > configure dolphin).
 You can get rid of plasma-desktop, but I keep it around just in case I need to change my color scheme/kvantum theme. 
 I have gotten this to work with both breeze and lightly but I still need to test if it'll work. 
+Qt6ct doesn't have a breeze application style, so I change it to kvantum, which I haven't seen affect any apps yet, but changing the font is neccessary in qt6ct. 
+
 I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the files. I have no idea if importing will work so please let me know via issues tab, if that can be opened.</s>
 
 So the way above does work, but after even more testing here's what I learned. Getting qt apps to work outside of KDE seems only possible on arch due to the godsend that is qt5ct-kde which allows you to use kde color schemes. The easiest way to get this to work is by downloading the package, so for my setup it would be this
@@ -74,11 +80,11 @@ So the way above does work, but after even more testing here's what I learned. G
 yay -S qt5ct-kde qt6ct qogir-gtk-theme-git qogir-kde-theme-git dolphin konsole kate
 
 Then open up (like stated above) qt5ct and qt6ct in both user and sudo and set the application style to breeze, the color scheme to custom and Qogir-Dark (or whichever theme you got), and the most important step <b> set the font theme to Noto Sans 10 and fixed with to Monospace 10</b>. This fixes the kerning of text in every kde app. <b>If your using Plasma, setting QT_QPA_PLATFORMTHEME=qt5ct in /etc/environment will cause insane lag when dragging files</b>. The only reason to use the platform theme variable is if you still want neofetch to have the correct DE stated, <b>The universal fix is to add XDG_CURRENT_DESKTOP=KDE in /etc/environment</b>. In my testing this will work in Qtile and KDE. Now you can use the best suite of apps linux has to offer in any desktop/window manager you see fit!
+Qt6ct doesn't have a breeze application style, so I change it to kvantum, which I haven't seen affect any apps yet, but changing the font is neccessary in qt6ct. 
 
 ![image](https://user-images.githubusercontent.com/64805993/180672311-2896ab52-3047-439e-9df7-978b630f23d7.png)
 Proof
 
-Update: You can safely remove plasma and plasma-desktop after setting the color theme. 
 # Inconsistent Cursor Theme
 So there's a ton of solutions, but the one that I've found is editing your ~/.config/gtk-3.0/settings.ini and ~/.config/gtk-4.0/settings.ini and change it to the theme you want. You can find what the names are with (thank you arch wiki) find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors" command. If that doesn't work, then you need to edit your ~/.Xresources file and put the icon theme in there, which I've had to do every single time I install endeavour os plasma 
 
