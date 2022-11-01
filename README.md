@@ -22,6 +22,8 @@ Alright I figured out how to get HOI4 to run natively. You need to put in the me
 
 If your on an Optimus System, you need to be in nvidia mode to play opengl games, as in my experience they all with forcibly run on the intel card and games like TF2 won't let you play online using the launch options. 
 
+Red Dead Redemption 2: Running with gamemode surprisingly causes it to freeze every once in awhile, which you need to force quit the game to fix. 
+
 # Endeavour OS/Arch
 When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
 # Qtile/Picom
