@@ -96,3 +96,6 @@ I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't loa
 # Optimus Manager Can't Switch Modes
 So for whatever reason Optimus Manager will probably stop working for you like it has for me about... 5 times ish. Other than just a reset of config files, one issue I was having was with Endeavour OS's sddm settings (I think), the fix is this https://github.com/Askannz/optimus-manager/issues/356#issuecomment-1100828176
 You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
+
+#Your system is screwed up and you can't get into a desktop environment
+Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. 
