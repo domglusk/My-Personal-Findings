@@ -14,7 +14,7 @@ Red Dead Redemption 2 can be modded with both Scripthook and LML, just install b
 
 # Various Game Fixes
 Hearts of Iron IV running on an optimus will give a black screen on the launcher, both on native and wine. Native uses OpenGL which seems to run terribly in my case, forcing it to use wine specifically 7.0.3. and using DirectX9 will fix the performance, but 5x speed will still be slow.
-To get HOI4 running on OpenGL well you need to use "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%" as the launch options. Haven't tested native but will soon.
+To get HOI4 running on OpenGL well you need to use "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%" as the launch options."
 
 Alright I figured out how to get HOI4 to run natively. You need to put in the mentioned launch options, there are two things you can do.
 1st Way: Whenever you need to use the launcher (to edit mods playtests and such) remove the first underscore _ from "__NV_PRIME_RENDER_OFFLOAD=1" that way it'll launch without giving a black screen. To launch the game add the underscore _ back and launch skipping the launcher from the preparing to launch.
@@ -32,11 +32,12 @@ Make sure to enable vsync on picom via the autostart.conf.
 
 If your getting fps higher than what your screen should be getting after moving between workspaces in qtile, move the game over to it's own workspace and that should fix it.
 
-Replace qtile and picom with their -git versions
+Replace qtile and picom with their -git versions for more options and better compatibility
 
-A really cool thing you can do with pacman is install packages via a a .txt file generated via pacman -Q > installedpackages.txt (which can be used to import your previous installed packages) and can be installed via yay -S - < installedpackages.txt (the name doesn't matter it can be whatever)
-
-Use Xrender NOT OpenGL on picom-conf 
+A really cool thing you can do with pacman is install packages via a .txt file generated via pacman -Qqe > installedpackages.txt (which can be used to import your previous installed packages) and can be installed via yay -S - < installedpackages.txt (the name doesn't matter it can be whatever). 
+Q = query 
+q = quiet/less information which just gives the package name without the version
+e = explicitly installed, packages installed via yay -S package-name or pacman -S packagename 
 
 Picom with Qtile will give you really bad performance, (tested on tf2 with a difference of ~30fps in main menu) 
 This can be resolved by using Qtile as the Window Manager for XFCE4 and Picom as the compositor, for some reason adding xfce4 in the mix makes it perform well.
@@ -46,7 +47,7 @@ Instead of adding i3 to the autostart, simply add qtile instead with the command
 Add picom as a startup app in XFCE, NOT in ~/.config/qtile/autostart.sh
 
 # How to make GTK and QT Apps Consistent w/ Any Theme
-<s>I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
+I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
 
 Install
 qt5ct-kde
@@ -55,34 +56,20 @@ kvantum-git
 dolphin
 kate
 konsole
-plasma-desktop
-
-yay -S --needed qt5ct-kde qt6ct kvantum-git dolphin kate konsole plasma-desktop
+breeze
+  
+yay -S --needed qt5ct-kde qt6ct kvantum-git dolphin kate konsole breeze
 (should work)
 
-Set the environment variables in /etc/environment/ (just add it on it's own line) to 
-$XDG_CURRENT_SESSION=KDE
-and log into plasma-desktop. Set your application style to kvantum and set the theme to the respective color scheme (KvArc for example in Kvantum and color schemes). This is because you can't import kde color schemes easily to qt5ct and qt6ct. Set your icon theme to the one you want to use (for me that was Fluent Dark), change your cursor to the one you want (again Fluent for me) 
-After doing that log back into xfce/qtile/gnome/ whatever your using and open up qt5ct, sudo qt5ct, qt6ct, and sudo qt6ct. In ALL of them set the application theme to kvantum, leave the color scheme as default. Go to fonts and set 
+First you should add a color scheme you want to $HOME/.local/share/color-schemes/ and /usr/local/share/color-schemes/, for me that was https://github.com/vinceliuice/Qogir-kde 
+Open up qt5ct-kde and 
+Go to fonts and set 
 General: Noto Sans (Regular) 10 
 Fixed width: Monospace (Regular) 10
 DO NOT create a fonts.conf. 
 Set the icon theme to a dark variant, unless your insane and like light themes. Do this for both root and user qt5ct and qt6ct.
-Finally, comment out $XDG_CURRENT_SESSION=KDE and add
 QT_QPA_PLATFORMTHEME-qt5ct
-Now you should have a consistent dark theme for every app you use, including configuration settings (right click > configure dolphin).
-You can get rid of plasma-desktop, but I keep it around just in case I need to change my color scheme/kvantum theme. 
-I have gotten this to work with both breeze and lightly but I still need to test if it'll work. 
-Qt6ct doesn't have a breeze application style, so I change it to kvantum, which I haven't seen affect any apps yet, but changing the font is neccessary in qt6ct. 
-
-I'm going to attach my qt5ct, qt6ct, and both gtk 2 3 and 4 folders with the files. I have no idea if importing will work so please let me know via issues tab, if that can be opened.</s>
-
-So the way above does work, but after even more testing here's what I learned. Getting qt apps to work outside of KDE seems only possible on arch due to the godsend that is qt5ct-kde which allows you to use kde color schemes. The easiest way to get this to work is by downloading the package, so for my setup it would be this
-
-yay -S qt5ct-kde qt6ct qogir-gtk-theme-git qogir-kde-theme-git dolphin konsole kate
-
-Then open up (like stated above) qt5ct and qt6ct in both user and sudo and set the application style to breeze, the color scheme to custom and Qogir-Dark (or whichever theme you got), and the most important step <b> set the font theme to Noto Sans 10 and fixed with to Monospace 10</b>. This fixes the kerning of text in every kde app. <b>If your using Plasma, setting QT_QPA_PLATFORMTHEME=qt5ct in /etc/environment will cause insane lag when dragging files</b>. The only reason to use the platform theme variable is if you still want neofetch to have the correct DE stated, <b>The universal fix is to add XDG_CURRENT_DESKTOP=KDE in /etc/environment</b>. In my testing this will work in Qtile and KDE. Now you can use the best suite of apps linux has to offer in any desktop/window manager you see fit!
-Qt6ct doesn't have a breeze application style, so I change it to kvantum, which I haven't seen affect any apps yet, but changing the font is neccessary in qt6ct. 
+Now you should have a consistent dark theme for every app you use, including configuration settings (right click > configure dolphin). I'll attach my qt5ct and qt6ct config files, dependencies are qogir-kde-theme-git or the manually add the color scheme to /usr/local/share/color-schemes/ and papirus-icon-theme
 
 ![image](https://user-images.githubusercontent.com/64805993/180672311-2896ab52-3047-439e-9df7-978b630f23d7.png)
 Proof
@@ -97,5 +84,5 @@ I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't loa
 So for whatever reason Optimus Manager will probably stop working for you like it has for me about... 5 times ish. Other than just a reset of config files, one issue I was having was with Endeavour OS's sddm settings (I think), the fix is this https://github.com/Askannz/optimus-manager/issues/356#issuecomment-1100828176
 You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
 
-#Your system is screwed up and you can't get into a desktop environment
+#Your system is screwed up and you can't get into a desktop environment and need to debug
 Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. 
