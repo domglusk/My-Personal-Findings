@@ -47,6 +47,9 @@ Instead of adding i3 to the autostart, simply add qtile instead with the command
 Add picom as a startup app in XFCE, NOT in ~/.config/qtile/autostart.sh
 
 # How to make GTK and QT Apps Consistent w/ Any Theme
+
+If you want a simple fix, you can import a Trolltech.conf in ~/.config/ which should work but it won't be customizable. I'll attach mine, if it works please let me know.
+
 I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
 
 Install
@@ -84,5 +87,14 @@ I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't loa
 So for whatever reason Optimus Manager will probably stop working for you like it has for me about... 5 times ish. Other than just a reset of config files, one issue I was having was with Endeavour OS's sddm settings (I think), the fix is this https://github.com/Askannz/optimus-manager/issues/356#issuecomment-1100828176
 You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
 
-#Your system is screwed up and you can't get into a desktop environment and need to debug
+# Your system is screwed up and you can't get into a desktop environment and need to debug
 Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. 
+
+# USB Autosuspend (And How to Disable It)
+If you have something plugged into your computer that will disconnect after a few seconds your probably suffering from something that plagued me for a long time when on OpenSUSE Tumbleweed. I finally came across a fix, but I can't refind the forum post. Here's what you do
+add usbcore.autosuspend=-1 to your GRUB_CMDLINE_LINUX_DEFAULT= line in /etc/default/grub. For example mine looks like this: GRUB_CMDLINE_LINUX_DEFAULT="splash=silent quiet nosimplefb=1 usbcore.autosuspend=-1 nvidia_drm.modeset=1 mitigations=off security=apparmor pci=nomsi pci=nommconf"
+Very simple fix that should be the default.
+
+# Slow pasting in oh-my-zsh
+Found in here: https://github.com/zsh-users/zsh-autosuggestions/issues/276
+Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of your .zshrc or in your .zsh_env that is sourced near the bottom.
