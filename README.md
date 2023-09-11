@@ -98,3 +98,7 @@ Very simple fix that should be the default.
 # Slow pasting in oh-my-zsh
 Found in here: https://github.com/zsh-users/zsh-autosuggestions/issues/276
 Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of your .zshrc or in your .zsh_env that is sourced near the bottom.
+
+# Save to Subdirectory in Spectacle
+It took me an embarrasing long time to figure this out, I'm convinced it had to be a bug that got fixed after a month or so.
+Spectacle by default doesn't save anything to when you take a screenshot, which shouldn't be the default imo, but the first go into spectacle and check the option for "Accept on click-and-release" as well as "Save file to a default folder", "Copy image to clipboard", and "Do not take a screenshot automatically" Then under Save, replace the "filename" option with %T/%d-%M-%D-%M-%Y This saves to a subdirectly by title name, THe trick is to put / AFTER the variable for your subdirectory. While your at it you can change the keybinds so print takes a screenshot type of your choosing instead of opening spectacle
