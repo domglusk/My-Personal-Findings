@@ -88,7 +88,7 @@ So for whatever reason Optimus Manager will probably stop working for you like i
 You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
 
 # Your system is screwed up and you can't get into a desktop environment and need to debug
-Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. 
+Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. You can install it via nix-env or pip if it's not in your repos.
 
 # USB Autosuspend (And How to Disable It)
 If you have something plugged into your computer that will disconnect after a few seconds your probably suffering from something that plagued me for a long time when on OpenSUSE Tumbleweed. I finally came across a fix, but I can't refind the forum post. Here's what you do
@@ -102,3 +102,8 @@ Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of yo
 # Save to Subdirectory in Spectacle
 It took me an embarrasing long time to figure this out, I'm convinced it had to be a bug that got fixed after a month or so.
 Spectacle by default doesn't save anything to when you take a screenshot, which shouldn't be the default imo, but the first go into spectacle and check the option for "Accept on click-and-release" as well as "Save file to a default folder", "Copy image to clipboard", and "Do not take a screenshot automatically" Then under Save, replace the "filename" option with %T/%d-%M-%D-%M-%Y This saves to a subdirectly by title name, THe trick is to put / AFTER the variable for your subdirectory. While your at it you can change the keybinds so print takes a screenshot type of your choosing instead of opening spectacle
+
+# Authorization required, but no authorization protocol specified
+I had this issue recently where running sudo visudo would give me this error. Took me awhile to find a fix since since most threads are about ssh, but found [this](https://stackoverflow.com/questions/73490184/sudo-nautilus-gives-authorization-required-but-no-authorization-protocol-specif) which gave me the fix running 
+xhost + local:  
+which did work for me
