@@ -107,3 +107,10 @@ Spectacle by default doesn't save anything to when you take a screenshot, which 
 I had this issue recently where running sudo visudo would give me this error. Took me awhile to find a fix since since most threads are about ssh, but found [this](https://stackoverflow.com/questions/73490184/sudo-nautilus-gives-authorization-required-but-no-authorization-protocol-specif) which gave me the fix running 
 xhost + local:  
 which did work for me
+
+# Xsession login is disabled for $USER
+This error started appearing after installing nushell, I'm on openSUSE Tumbleweed so it might be exclusive to it I'm not sure
+The fix comes from [this thread](https://www.linuxquestions.org/questions/suse-opensuse-60/xsession-login-for-user-is-disabled-611855/) you need to add your shell, for me, /bin/zsh to /etc/shells which should look like this 
+/usr/bin/su # only if you installeed nushell
+/bin/zsh
+/bin/bash
