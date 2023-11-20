@@ -114,3 +114,13 @@ The fix comes from [this thread](https://www.linuxquestions.org/questions/suse-o
 /usr/bin/su # only if you installeed nushell
 /bin/zsh
 /bin/bash
+
+# Neovim and Konsole and the Cursor
+If you've changed your cursor in Konsole to anything other than the default you'll find that exiting neovim reverts the cursor back to a block. It's a [known bug](https://mail.kde.org/pipermail/konsole-devel/2022-January/040613.html) that hasn't been fixed yet. The only fix I've found is to run reset after exiting neovim, or using tmux/zellij, but Konsole is the best terminal and multiplexer in my opinion so using those is redundant, therefore I've provided a script that fixes the bug, which looks like this
+```bash
+#!/bin/bash
+# Run Neovim
+nvim "$@"
+# Run reset after exiting Neovim
+reset
+```
