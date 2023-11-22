@@ -124,3 +124,8 @@ nvim "$@"
 # Run reset after exiting Neovim
 reset
 ```
+or you can make an alias for it, as well as lvim from nix
+```zsh
+alias nvim='nvim "$@"; reset'
+alias lvim='lvim "@$"; reset'
+```
