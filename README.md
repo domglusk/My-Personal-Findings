@@ -1,5 +1,12 @@
 # Various Fixes and Notes That Are Important
 Don't know how to do this, but I'll put my findings here to share
+# About my setup
+I'm currently using a: 
+* MSI ge75raider10sf, which is a nvidia/intel optimus laptop running OpenSUSE Tumbleweed
+* AMD based Desktop, also running OpenSUSE Tumbleweed
+* Surface Pro 7 running NixOS Unstable
+
+I run KDE Plasma on all of my computers and use KDE's suite of apps (dolphin, kate, ark, etc.) and I use zsh as my shell.
 
 # Modding
 When using Vortex through SteamTinkerLaunch, modding is very easy (tested on Fallout 4, Fallout New Vegas, Tale of Two Wastelands, and Skyrim
@@ -46,36 +53,8 @@ To get rid of the panel you need to do killall xfce4-panel before saving the ses
 Instead of adding i3 to the autostart, simply add qtile instead with the command being 'qtile start'
 Add picom as a startup app in XFCE, NOT in ~/.config/qtile/autostart.sh
 
-# How to make GTK and QT Apps Consistent w/ Any Theme
-
-If you want a simple fix, you can import a Trolltech.conf in ~/.config/ which should work but it won't be customizable. I'll attach mine, if it works please let me know.
-
-I couldn't find a single comprehensive guide out there that I could find on getting KDE (QT) apps to work on any other desktop environment other than KDE (wihout either mismatched dark and light themes or horrible tearing in apps). IT IS VERY POSSIBLE, but you need to install a lot of dependencies.
-
-Install
-qt5ct-kde
-qt6ct
-kvantum-git
-dolphin
-kate
-konsole
-breeze
-  
-yay -S --needed qt5ct-kde qt6ct kvantum-git dolphin kate konsole breeze
-(should work)
-
-First you should add a color scheme you want to $HOME/.local/share/color-schemes/ and /usr/local/share/color-schemes/, for me that was https://github.com/vinceliuice/Qogir-kde 
-Open up qt5ct-kde and 
-Go to fonts and set 
-General: Noto Sans (Regular) 10 
-Fixed width: Monospace (Regular) 10
-DO NOT create a fonts.conf. 
-Set the icon theme to a dark variant, unless your insane and like light themes. Do this for both root and user qt5ct and qt6ct.
-QT_QPA_PLATFORMTHEME-qt5ct
-Now you should have a consistent dark theme for every app you use, including configuration settings (right click > configure dolphin). I'll attach my qt5ct and qt6ct config files, dependencies are qogir-kde-theme-git or the manually add the color scheme to /usr/local/share/color-schemes/ and papirus-icon-theme
-
-![image](https://user-images.githubusercontent.com/64805993/180672311-2896ab52-3047-439e-9df7-978b630f23d7.png)
-Proof
+# How to make QT Apps look Good using Breeze Outside of KDE
+In my opinion any QT app looks best when using the Breeze style from KDE. Once you install breeze through your package manager, you can easily make QT apps use it by setting ```QT_STYLE_OVERRIDE=Breeze``` in ```/etc/environment``` You can even change the color by editing your Trolltech.conf and kdeglobals files in ```~/.config/``` which is easiest to just install plasma and set the colorscheme in it and uninstall it, I've provided my kdeglobals and Trolltech.conf to give a dark theme (Qogir-kde) without going through the install plasma hassle.
 
 # Inconsistent Cursor Theme
 So there's a ton of solutions, but the one that I've found is editing your ~/.config/gtk-3.0/settings.ini and ~/.config/gtk-4.0/settings.ini and change it to the theme you want. You can find what the names are with (thank you arch wiki) find /usr/share/icons ~/.local/share/icons ~/.icons -type d -name "cursors" command. If that doesn't work, then you need to edit your ~/.Xresources file and put the icon theme in there, which I've had to do every single time I install endeavour os plasma 
@@ -116,16 +95,28 @@ The fix comes from [this thread](https://www.linuxquestions.org/questions/suse-o
 /bin/bash
 
 # Neovim and Konsole and the Cursor
-If you've changed your cursor in Konsole to anything other than the default you'll find that exiting neovim reverts the cursor back to a block. It's a [known bug](https://mail.kde.org/pipermail/konsole-devel/2022-January/040613.html) that hasn't been fixed yet. The only fix I've found is to run reset after exiting neovim, or using tmux/zellij, but Konsole is the best terminal and multiplexer in my opinion so using those is redundant, therefore I've provided a script that fixes the bug, which looks like this
-```bash
-#!/bin/bash
-# Run Neovim
-nvim "$@"
-# Run reset after exiting Neovim
-reset
+If you've changed your cursor in Konsole to anything other than the default you'll find that exiting neovim reverts the cursor back to a block. It's a [known bug](https://mail.kde.org/pipermail/konsole-devel/2022-January/040613.html) that hasn't been fixed yet. [The fix that I found](https://gist.github.com/nishantwrp/1736251d801f180c996fb5c33333191d) was made by nishantwrp, so all credit to them. I adapted it for my needs, so adding a 5 to the escape sequence, and converted to be used in lazyvim. I use a blinking line as my cursor, so my autocommand is:
+for Neovim (LayzVim):
+```lua
+local function setup_autocmds()
+  vim.cmd([[
+        augroup MyAutoCmd
+            autocmd!
+            autocmd VimLeave * execute 'set guicursor=' | call chansend(v:stderr, "\x1b[5 q")
+        augroup END
+    ]])
+end
 ```
-or you can make an alias for it, as well as lvim from nix
-```zsh
-alias nvim='nvim "$@"; reset'
-alias lvim='lvim "@$"; reset'
+for Lunarvim
+```lua
+lvim.autocommands = {
+  {
+    "VimLeave",
+    {
+      pattern = "*",
+      command = "set guicursor= | call chansend(v:stderr, \"\x1b[5 q\")"
+    }
+  }
+}
 ```
+To change what cursor type you change the 5 in ```\"\x1b[5 q\"```
