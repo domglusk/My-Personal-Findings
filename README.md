@@ -76,7 +76,7 @@ Very simple fix that should be the default.
 
 # Slow pasting in oh-my-zsh
 Found in here: https://github.com/zsh-users/zsh-autosuggestions/issues/276
-Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of your .zshrc or in your .zsh_env that is sourced near the bottom.
+Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of your .zshrc or in your .zshenv that is sourced near the bottom.
 
 # Save to Subdirectory in Spectacle
 It took me an embarrasing long time to figure this out, I'm convinced it had to be a bug that got fixed after a month or so.
