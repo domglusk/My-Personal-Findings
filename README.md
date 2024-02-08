@@ -78,6 +78,9 @@ Very simple fix that should be the default.
 Found in here: https://github.com/zsh-users/zsh-autosuggestions/issues/276
 Add zstyle ':bracketed-paste-magic' active-widgets '.self-*' to the bottom of your .zshrc or in your .zshenv that is sourced near the bottom.
 
+# ZSH Plugin 'last-working-dir' not working
+This is for either oh my zsh's plugin or [mdumitru's broken out version](https://github.com/mdumitru/last-working-dir) Very simple fix, double check you don't have cat aliased to anything as it requires it to work. You can check by running 'which cat'
+
 # Save to Subdirectory in Spectacle
 It took me an embarrasing long time to figure this out, I'm convinced it had to be a bug that got fixed after a month or so.
 Spectacle by default doesn't save anything to when you take a screenshot, which shouldn't be the default imo, but the first go into spectacle and check the option for "Accept on click-and-release" as well as "Save file to a default folder", "Copy image to clipboard", and "Do not take a screenshot automatically" Then under Save, replace the "filename" option with %T/%d-%M-%D-%M-%Y This saves to a subdirectly by title name, The trick is to put / AFTER the variable for your subdirectory. While your at it you can change the keybinds so print takes a screenshot type of your choosing instead of opening spectacle
