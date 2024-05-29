@@ -1,12 +1,12 @@
 # Various Fixes and Notes That Are Important
 Don't know how to do this, but I'll put my findings here to share
 # About my setup
-I'm currently using a: 
+I'm currently using:
 * MSI ge75raider10sf, which is a nvidia/intel optimus laptop running OpenSUSE Tumbleweed
 * AMD based Desktop, also running OpenSUSE Tumbleweed
 * Surface Pro 7 running NixOS Unstable
 
-I run KDE Plasma on all of my computers and use KDE's suite of apps (dolphin, kate, ark, etc.) and I use zsh as my shell.
+I run KDE Plasma on Wayland for all of my computers and use KDE's suite of apps (dolphin, kate, ark, etc.) and I use zsh as my shell.
 
 # Modding
 When using Vortex through SteamTinkerLaunch, modding is very easy (tested on Fallout 4, Fallout New Vegas, Tale of Two Wastelands, and Skyrim
@@ -27,31 +27,7 @@ Alright I figured out how to get HOI4 to run natively. You need to put in the me
 1st Way: Whenever you need to use the launcher (to edit mods playtests and such) remove the first underscore _ from "__NV_PRIME_RENDER_OFFLOAD=1" that way it'll launch without giving a black screen. To launch the game add the underscore _ back and launch skipping the launcher from the preparing to launch.
 2nd way: you need to go to ~/.paradoxlauncher/ and find the Paradox Launcher in both folders, then you need to add "--disable-gpu" to the last line in the executable, so it looks like "${SCRIPTPATH}"/Launcher --no-sandbox -disable-gpu "$@" and now you should be able to launch the game normally. 
 
-If your on an Optimus System, you need to be in nvidia mode to play opengl games, as in my experience they all with forcibly run on the intel card and games like TF2 won't let you play online using the launch options. 
-
 Red Dead Redemption 2: Running with gamemode surprisingly causes it to freeze every once in awhile, which you need to force quit the game to fix. 
-
-# Endeavour OS/Arch
-When installing Endeavour OS make sure to follow the post install guides, as if you're on Nvidia like me the first kernal update will break your install, make sure to install their nvidia-hook package (see here https://forum.endeavouros.com/t/newest-update-broke-install-most-likely-nvidia-drivers/27590)
-# Qtile/Picom
-Qtile can easily be installed next to really any desktop environment, and importing the profile from Endeavour OS is really simple
-Make sure to enable vsync on picom via the autostart.conf. 
-
-If your getting fps higher than what your screen should be getting after moving between workspaces in qtile, move the game over to it's own workspace and that should fix it.
-
-Replace qtile and picom with their -git versions for more options and better compatibility
-
-A really cool thing you can do with pacman is install packages via a .txt file generated via pacman -Qqe > installedpackages.txt (which can be used to import your previous installed packages) and can be installed via yay -S - < installedpackages.txt (the name doesn't matter it can be whatever). 
-Q = query 
-q = quiet/less information which just gives the package name without the version
-e = explicitly installed, packages installed via yay -S package-name or pacman -S packagename 
-
-Picom with Qtile will give you really bad performance, (tested on tf2 with a difference of ~30fps in main menu) 
-This can be resolved by using Qtile as the Window Manager for XFCE4 and Picom as the compositor, for some reason adding xfce4 in the mix makes it perform well.
-This can be set up very easily, as demonstrated here https://forum.endeavouros.com/t/tutorial-easy-setup-endeavour-xfce-i3-tiling-window-manager/13171
-To get rid of the panel you need to do killall xfce4-panel before saving the session. There is no way to delete it otherwise. 
-Instead of adding i3 to the autostart, simply add qtile instead with the command being 'qtile start'
-Add picom as a startup app in XFCE, NOT in ~/.config/qtile/autostart.sh
 
 # How to make QT Apps look Good using Breeze Outside of KDE
 In my opinion any QT app looks best when using the Breeze style from KDE. Once you install breeze through your package manager, you can easily make QT apps use it by setting ```QT_STYLE_OVERRIDE=Breeze``` in ```/etc/environment``` You can even change the color by editing your Trolltech.conf and kdeglobals files in ```~/.config/``` which is easiest to just install plasma and set the colorscheme in it and uninstall it, I've provided my kdeglobals and Trolltech.conf to give a dark theme (Qogir-kde) without going through the install plasma hassle.
@@ -65,9 +41,6 @@ I tested Pop_OS! on an old macbook to let someone try linux, but it wouldn't loa
 # Optimus Manager Can't Switch Modes
 So for whatever reason Optimus Manager will probably stop working for you like it has for me about... 5 times ish. Other than just a reset of config files, one issue I was having was with Endeavour OS's sddm settings (I think), the fix is this https://github.com/Askannz/optimus-manager/issues/356#issuecomment-1100828176
 You need to commend out both lines that start with Display in /etc/sddm.conf pretty easy fix. 
-
-# Your system is screwed up and you can't get into a desktop environment and need to debug
-Use Qtile. In the repo I've put my list of packages I use for qtile plus my config. Should get everything you need. I've never had qtile break on me. Perfect window manager to test if an issue is desktop environment related or system related. You can install it via nix-env or pip if it's not in your repos.
 
 # USB Autosuspend (And How to Disable It)
 If you have something plugged into your computer that will disconnect after a few seconds your probably suffering from something that plagued me for a long time when on OpenSUSE Tumbleweed. I finally came across a fix, but I can't refind the forum post. Here's what you do
